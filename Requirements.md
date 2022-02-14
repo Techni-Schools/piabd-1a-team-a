@@ -1,25 +1,28 @@
+Opis projektu: Po podaniu zawartości lodówki program sprawdzi dostępne przepisy w bazie danych i zaproponuje dania które możemy z nich przygotować.
+
 Wymagania:
-- admin panel
-    1. usuwanie lub dodawanie przepisów
-    2. banowanie lub restrykcja użytkowania
+1. admin panel
+  - usuwanie lub dodawanie przepisów
+  - banowanie lub restrykcja użytkowania dla użytkownika
 
-- głowna strona
-    1. wyszukiwarka przepisów
-        a. filtracja po: użytkowniku, typie przepisu (wegańskie/wegetariańskie), czas przygotowania, ocena
-        b. wyszykuje po typie przepisu (nie tylko po nazwie, np.smoothie, ciasto, curry)
-        c. wyszukiwarka ignoruje wielkość liter
-    2. możliwość otwarcia przepisów w nowym oknie
-    3. dodawanie przepisów do listy ulubionych oraz własnych list
-    4. dodawanie, usuwanie oraz modyfikacja własnych przepisów
-       a. auto zapis wersji roboczej
+2. głowna strona
+    - wyszukiwarka przepisów
+         - filtracja po: użytkowniku, typie przepisu (wegańskie/wegetariańskie), czas przygotowania, ocena
+         - wyszykuje po typie przepisu (nie tylko po nazwie, np.smoothie, ciasto, curry)
+         - wyszukiwarka ignoruje wielkość liter
+    - możliwość otwarcia przepisów w nowym oknie
+    - dodawanie przepisów do listy ulubionych oraz własnych list
+    - dodawanie, usuwanie oraz modyfikacja własnych przepisów
+       - auto zapis wersji roboczej
 
-- login
-    1. okienko do spisania nazwy użytkownika
-    2. okienko do spisania hasła
-    3. przycisk "zapamiętaj mnie"
-    4. przycisk "nie pamiętam hasła"
+3. login
+    - okienko do wpisania nazwy użytkownika
+    - okienko do wpisania hasła
+    - przycisk "zapamiętaj mnie"
+    - przycisk "nie pamiętam hasła"
 
-- bazy danych
+4. tabele
     1. users
-    2. recipes
+    2. recipes PK
+    3. categories FK
     
