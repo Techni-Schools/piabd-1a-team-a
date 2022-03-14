@@ -23,6 +23,6 @@ Wymagania:
 
 4. tabele
     1. users
-    2. recipes PK
-    3. categories FK
+    2. recipes 
+    3. ingredients 
     
