@@ -24,5 +24,5 @@ Wymagania:
 4. tabele
     1. users
     2. recipes 
-    3. ingredients 
+    3. tags
     
