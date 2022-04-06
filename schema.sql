@@ -12,6 +12,7 @@ CREATE TABLE Categories (
     id INT IDENTITY(1,1),
     category_name VARCHAR(30),
     day_time_category_name VARCHAR(30),
+    -- add CHECK with predefined values 
     CONSTRAINT pk_categories_id PRIMARY KEY(id),
 );
 
@@ -20,6 +21,7 @@ CREATE TABLE Users (
     username VARCHAR(32) NOT NULL,
     [password] VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    -- add CHECK with @ 
     CONSTRAINT pk_users_id PRIMARY KEY(id)
 );
 
@@ -33,12 +35,17 @@ CREATE TABLE Recipes (
     id INT IDENTITY(1,1),
     category_id INT,
     [user_id] INT,
+    -- cleanup
     ingredients_id INT,
+    -- check relation 
     [name] VARCHAR(255) NOT NULL,
     author VARCHAR(100) NOT NULL,
+    -- cleanup
     rating INT,
+    -- change type to smaller
     cookbook VARCHAR(100),
     preptime INT,
+    -- add CHECK for positive no. only 
     ease_of_prep VARCHAR(20),
     photo VARCHAR(1000),
     CONSTRAINT pk_recipe_id PRIMARY KEY(id),
@@ -56,6 +63,7 @@ CREATE TABLE Lists (
     CONSTRAINT fk_user_id_lists FOREIGN KEY (user_id_list) REFERENCES Users(id) ON DELETE SET NULL
 );
 
+-- check relations
 CREATE TABLE Ingredients_category (
     id INT IDENTITY(1,1),
     ingredients_id_2 INT,
