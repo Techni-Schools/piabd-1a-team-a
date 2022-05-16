@@ -18,7 +18,7 @@ CREATE TABLE Categories (
 CREATE TABLE Users (
     id INT IDENTITY(1,1),
     username VARCHAR(32) NOT NULL,
-    [password] VARCHAR(50) NOT NULL,
+    [password] VARCHAR(72) NOT NULL,
     email VARCHAR(100) NOT NULL,
     CONSTRAINT ch_email CHECK (email like '%@%.%' ),
     CONSTRAINT pk_users_id PRIMARY KEY(id)
