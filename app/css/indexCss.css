@@ -1,0 +1,15 @@
+body {
+
+}
+
+.ingred {
+    float: left;
+    background: lightcoral;
+    width: 30%;
+}
+
+.recipes {
+    float: right;
+    background: aquamarine;
+    width: 70%;
+}
