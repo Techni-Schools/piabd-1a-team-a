@@ -21,6 +21,7 @@ body {
     background: aquamarine;
     width: 80%;
     padding-top: 10px;
+    height: 541px;
 }
 
 .recipes {
@@ -50,3 +51,34 @@ body {
 
 }
 
+.recipe1 {
+    background: orangered;
+    height: 200px;
+    width: 600px;
+}
+
+.recipeHead {
+    font-size: 30px;
+    position: relative;
+    top: 3px;
+    left: 6px;
+}
+
+.recipePhoto {
+    float: right;
+    height: 150px;
+    width: 150px;
+    background: greenyellow;
+    position: relative;
+    top: -40px;
+    left: -40px;
+}
+.recipeText {
+    font-size: 20px;
+    width: 350px;
+
+    position: relative;
+    top: -25px;
+    left: 15px;
+    /*background: green;*/
+}
