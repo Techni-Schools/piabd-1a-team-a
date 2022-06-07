@@ -2,11 +2,7 @@ body {
 
 }
 
-.navbar {
-    background: burlywood;
-    height: 100px;
-    margin-bottom: 10px;
-}
+
 
 .ingred {
     float: left;
@@ -41,9 +37,7 @@ body {
     width: 100%;
 }
 
-.logo {
-    height: 100%;
-}
+
 
 .footer {
     height: 100px;

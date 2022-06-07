@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    background: #666666;
+    height: 500px;
+    width: 1000px;
+}
+.recipePhoto {
+    background: greenyellow;
+    height: 300px;
+    width: 300px;
+
+}
+.recipeName {
+    height: 200px;
+    width: 300px;
+    float: left;
+    background: red;
+}
+.recipeDesc {
+    height: 500px;
+    width: 400px;
+    background: cornflowerblue;
+    float: right;
+}
