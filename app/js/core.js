@@ -56,3 +56,14 @@ function loadRecipe(o){
     xmlhttp.open("GET", "loader.php?type=recipe&recipe="+o.id, true);
     xmlhttp.send();
 }
+function addToFav(o){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+
+        }
+    };
+    xmlhttp.open("GET", "fav.php?recipe="+o.id, true);
+    xmlhttp.send();
+}

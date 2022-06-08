@@ -89,6 +89,7 @@ if ($_GET) {
         <div class="modalRecipePhoto"><img src="'.$row['photo'].'"> </div>
         <div class="modalRecipeName">'.$row['name'].'</div>
         <button class="closeBtn" onclick="document.getElementById(`frame`).style.display=`none`">close</button>
+        <button class="closeBtn" onclick="fav('.$row['id'].')">Add to fav</button>
     </div>
     <div class="modalRecipeDesc">Składniki: <br>'.$i.'<br> Opis:<br>'.$row['description'].'
     </div>
