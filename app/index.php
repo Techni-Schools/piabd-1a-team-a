@@ -17,7 +17,16 @@
 </div>
 <div class="navbar">
     <img class="logo" src="img/fridge.jpeg" alt="Logo">
-    <a href="login.php">Login</a>
+    <?php
+    session_start();
+    if($_SESSION['zalogowany']){
+        echo '<a href="favList.php">Lista ulubionych</a> ';
+        echo '<a href="recipeManager.php">Menedżer przepisów</a>';
+    }
+    else{
+        echo '<a href="login.php">Login</a>';
+    }
+    ?>
     <!--    TODO navbar-->
 </div>
 <div class="ingred" id="ingred">

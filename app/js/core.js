@@ -64,6 +64,7 @@ function addToFav(o){
 
         }
     };
-    xmlhttp.open("GET", "fav.php?recipe="+o.id, true);
+    xmlhttp.open("GET", "fav.php?recipe="+o, true);
     xmlhttp.send();
+    console.log(o)
 }

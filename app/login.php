@@ -1,9 +1,36 @@
 <?php
-//require_once "config.php";
+require_once "config.php";
 require_once "functions.php";
 $_err = "";
 if($_POST){
-
+    $usernameHex = bin2hex($_POST['username']);
+    $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+    if ($conn->connect_error) {
+        die("DB err");
+    }
+    $conn->set_charset("utf8");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username=UNHEX(?)");
+    $stmt->bind_param("s",$usernameHex);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if(password_verify($_POST['password'],$row['password'])){
+                session_start();
+                $_SESSION['zalogowany'] = true;
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['username'] = $row['username'];
+                header("Location: index.php");
+            }
+            else{
+                $_err = "BAd username or password";
+            }
+        }
+    }
+    else{
+        $_err = "Bad username or password";
+    }
+    $conn->close();
 }
 ?>
 <!doctype html>
