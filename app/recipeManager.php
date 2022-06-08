@@ -4,6 +4,49 @@ $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("DB err");
 }
+session_start();
+if(!$_SESSION['zalogowany']){
+    die("Ta funkcja wymaga logowania");
+}
+session_start();
+
+if($_GET){
+    if($_GET['addIC']){
+        $stmt = $conn->prepare("INSERT INTO IngredientsCategory (name) VALUES (UNHEX(?))");
+        $a = bin2hex($_GET['icName']);
+        $stmt->bind_param("s",$a);
+        $stmt->execute();
+    }
+    else if($_GET['addI']){
+        $stmt = $conn->prepare("INSERT INTO ingredients (name,category) VALUES (UNHEX(?),?)");
+        $a = bin2hex($_GET['iName']);
+        $b = intval($_GET['ic']);
+        $stmt->bind_param("si",$a,$b);
+        $stmt->execute();
+    }
+    else if($_GET['removeIC']){
+        $stmt = $conn->prepare("DELETE FROM IngredientsCategory WHERE id=?");
+        $b = intval($_GET['ic']);
+        $stmt->bind_param("i",$b);
+        $stmt->execute();
+    }
+    else if($_GET['removeI']){
+        $stmt = $conn->prepare("DELETE FROM ingredients WHERE id=?");
+        $b = intval($_GET['i']);
+        $stmt->bind_param("i",$b);
+        $stmt->execute();
+    }
+    else{
+        $stmt = $conn->prepare("INSERT INTO recipes (name,userId,photo,description) VALUES (UNHEX(?),?,UNHEX(?),UNHEX(?))");
+        $a = bin2hex($_GET['iName']);
+        $b = bin2hex($_GET['iName']);
+        $c = bin2hex($_GET['iName']);
+        $stmt->bind_param("siss",$a,$_SESSION['id'],$b);
+        $stmt->execute();
+    }
+}
+
+
 $_cats = "";
 $conn->set_charset("utf8");
 $stmt = $conn->prepare("SELECT * FROM IngredientsCategory");
@@ -95,7 +138,7 @@ $conn->close();
 <div class="removeRecipe rec"><h1>Ingred Manager</h1>
     <form action="">
         <input type="text" name="icName" placeholder="Ingred category">
-        <button name="addIC">Add</button>
+        <button name="addIC" value="t">Add</button>
     </form>
     <form action="">
         <input type="text" name="iName" placeholder="Ingred name">
@@ -104,7 +147,7 @@ $conn->close();
             echo $_cats;
             ?>
         </select>
-        <button name="addI">Add</button>
+        <button name="addI" value="t">Add</button>
     </form>
     <form action="">
         <select name="ic">
@@ -112,7 +155,7 @@ $conn->close();
             echo $_cats;
             ?>
         </select>
-        <button name="removeIC">Remove</button>
+        <button name="removeIC" value="t">Remove</button>
     </form>
     <form action="">
         <select name="i">
@@ -120,7 +163,7 @@ $conn->close();
             echo $_ingredients;
             ?>
         </select>
-        <button name="removeI">Remove</button>
+        <button name="removeI" value="t">Remove</button>
     </form>
 </div>
 
