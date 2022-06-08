@@ -68,3 +68,13 @@ function addToFav(o){
     xmlhttp.send();
     console.log(o)
 }
+function renderFav(){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("listBox").innerHTML = this.responseText;
+        }
+    };
+    xmlhttp.open("GET", "loader.php?type=fav", true);
+    xmlhttp.send();
+}

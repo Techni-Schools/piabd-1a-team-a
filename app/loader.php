@@ -81,22 +81,46 @@ if ($_GET) {
                                     $i .= "<p class='ingredHead'>" . $row2['catName'] . "</p>";
                                 }
                                 $lastCat = intval($row2['catId']);
-                                $i .=  "<p class='ingredChild'>" . $row2['name'] . "</p>";
+                                $i .= "<p class='ingredChild'>" . $row2['name'] . "</p>";
                             }
                         }
                         echo '<div class="modalBox main">
     <div class="col">
-        <div class="modalRecipePhoto"><img src="'.$row['photo'].'"> </div>
-        <div class="modalRecipeName">'.$row['name'].'</div>
+        <div class="modalRecipePhoto"><img src="' . $row['photo'] . '"> </div>
+        <div class="modalRecipeName">' . $row['name'] . '</div>
         <button class="closeBtn" onclick="document.getElementById(`frame`).style.display=`none`">close</button>
-        <button class="closeBtn" onclick="addToFav('.$row['id'].')">Add to fav</button>
+        <button class="closeBtn" onclick="addToFav(' . $row['id'] . ')">Add to fav</button>
     </div>
-    <div class="modalRecipeDesc">Składniki: <br>'.$i.'<br> Opis:<br>'.$row['description'].'
+    <div class="modalRecipeDesc">Składniki: <br>' . $i . '<br> Opis:<br>' . $row['description'] . '
     </div>
 
 </div>';
                     }
                 }
+            }
+            break;
+        case "fav":
+            session_start();
+            if ($_SESSION['zalogowany']) {
+                $stmt = $conn->prepare("SELECT r.name as name, r.id as id, r.description as description, r.photo as photo FROM recipes r, fav f WHERE f.user=? AND f.recipe=r.id");
+                $stmt->bind_param("i",$_SESSION['id']);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="recipe1" onclick="loadRecipe(this)" id="' . $row['id'] . '">
+            <p class="recipeHead">' . $row['name'] . '</p>
+            <div class="recipePhoto"><img src="' . $row['photo'] . '"></div>
+            <div class="recipeDesc"><p>' . $row['description'] . '</p></div>
+        </div>';
+                    }
+                }
+                else{
+                    echo "Brak ulubionych";
+                }
+            }
+            else{
+                echo "Aby używać tej opcji zaloguj się";
             }
             break;
     }
