@@ -32,7 +32,7 @@ create table users
     constraint users_username_uindex
         unique (username(32)),
     constraint ch_email
-        check (`email` like _utf8mb4\'%@%.%\')
+        check (`email` like '%@%')
 );
 
 create table recipes
