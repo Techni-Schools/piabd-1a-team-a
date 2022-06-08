@@ -27,7 +27,16 @@ if ($_POST) {
             $stmt->bind_param("s", $usernameHex);
             $stmt->execute();
             $stmt->store_result();
-
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $_err = "Nazwa użytkownika zajęta";
+            }
+            else{
+                $stmt = $conn->prepare("INSERT INTO users (username,password,email) VALUES (UNHEX(?),?,UNHEX(?))");
+                $stmt->bind_param("sss", $usernameHex,$hash,$emailHex);
+                $stmt->execute();
+                header("Location: login.php");
+            }
             $conn->close();
 
         } else {

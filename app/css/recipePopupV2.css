@@ -4,25 +4,40 @@ body {
 }
 
 .main {
-    background: #666666;
-    height: 500px;
+    height: max-content;
     width: 1000px;
 }
-.recipePhoto {
-    background: greenyellow;
-    height: 300px;
-    width: 300px;
 
+img {
+    width: 100%;
 }
-.recipeName {
-    height: 200px;
-    width: 300px;
+
+.col {
+    padding: 0px;
     float: left;
-    background: red;
+    width: 30%;
 }
+
+.recipePhoto {
+    height: max-content;
+    width: 100%;
+}
+
+.recipeName {
+    height: max-content;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
 .recipeDesc {
-    height: 500px;
-    width: 400px;
-    background: cornflowerblue;
+    height: max-content;
+    width: 69%;
+    background: rgba(255, 255, 255, 0.3);
+    margin-left: 1%;
     float: right;
+}
+
+.main {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.22);
 }

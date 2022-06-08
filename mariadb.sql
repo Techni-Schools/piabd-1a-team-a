@@ -1,28 +1,19 @@
-CREATE DATABASE fridgedb;
-USE fridgedb;
-create table categories
+create table IngredientsCategory
 (
-    id                     int auto_increment
+    id   int auto_increment
         primary key,
-    category_name          varchar(30) null,
-    day_time_category_name varchar(30) null
+    name varchar(20) not null
 );
 
 create table ingredients
 (
-    id   int auto_increment
+    id       int auto_increment
         primary key,
-    name varchar(100) not null
-);
-
-create table IngredientsCategory
-(
-    id             int auto_increment
-        primary key,
-    ingredientsId2 int         null,
-    name           varchar(20) not null,
-    constraint fk_ingredients_id_2
-        foreign key (ingredientsId2) references ingredients (id)
+    name     varchar(100) not null,
+    category int          null,
+    constraint ingredients_IngredientsCategory_id_fk
+        foreign key (category) references IngredientsCategory (id)
+            on delete set null
 );
 
 create table users
@@ -37,7 +28,7 @@ create table users
     constraint users_username_uindex
         unique (username(32)),
     constraint ch_email
-        check (`email` like '%@%.%')
+        check (`email` like _utf8mb4\'%@%.%\')
 );
 
 create table lists
@@ -54,25 +45,33 @@ create table lists
 
 create table recipes
 (
-    id            int auto_increment
+    id          int auto_increment
         primary key,
-    categoryId    int           null,
-    userId        int           null,
-    ingredientsId int           null,
-    name          varchar(255)  not null,
-    rating        tinyint       null,
-    cookbook      varchar(100)  null,
-    preptime      int           null,
-    easeOfPrep    varchar(20)   null,
-    photo         varchar(1000) null,
-    constraint fk_category_id
-        foreign key (categoryId) references categories (id)
-            on delete set null,
-    constraint fk_ingredients_id
-        foreign key (ingredientsId) references ingredients (id),
+    name        varchar(255)  not null,
+    userId      int           null,
+    rating      tinyint       null,
+    preptime    int           null,
+    easeOfPrep  varchar(20)   null,
+    photo       varchar(1000) null,
+    description varchar(2000) null,
     constraint fk_user_id
         foreign key (userId) references users (id)
             on delete set null,
     constraint ch_time
         check (`preptime` > 0)
 );
+
+create table ingredientsList
+(
+    id     int auto_increment
+        primary key,
+    ingred int null,
+    recipe int null,
+    constraint ingredientsList_ingredients_id_fk
+        foreign key (ingred) references ingredients (id)
+            on delete cascade,
+    constraint ingredientsList_recipes_id_fk
+        foreign key (recipe) references recipes (id)
+            on delete cascade
+);
+

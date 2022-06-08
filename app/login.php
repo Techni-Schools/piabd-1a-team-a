@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+//require_once "config.php";
 require_once "functions.php";
 $_err = "";
 if($_POST){

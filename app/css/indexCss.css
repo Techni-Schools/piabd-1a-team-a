@@ -3,7 +3,6 @@ body {
 }
 
 
-
 .ingred {
     float: left;
     background: lightcoral;
@@ -17,7 +16,14 @@ body {
     background: aquamarine;
     width: 80%;
     padding-top: 10px;
-    height: 541px;
+    min-height: 541px;
+    height: max-content;
+
+}
+
+.recipesList {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .recipes {
@@ -31,12 +37,12 @@ body {
 
 .ingredChild {
     padding-left: 20px;
+    cursor: pointer;
 }
 
 .search {
     width: 100%;
 }
-
 
 
 .footer {
@@ -49,24 +55,30 @@ body {
     background: orangered;
     height: 200px;
     width: 600px;
+    margin: 10px;
+    cursor: pointer;
 }
-
+.active{
+    color: aqua;
+}
 .recipeHead {
     font-size: 30px;
     position: relative;
     top: 3px;
     left: 6px;
 }
-
+.recipePhoto img{
+    width: 100%;
+}
 .recipePhoto {
     float: right;
     height: 150px;
     width: 150px;
-    background: greenyellow;
     position: relative;
     top: -40px;
     left: -40px;
 }
+
 .recipeDesc {
     font-size: 20px;
     width: 350px;
