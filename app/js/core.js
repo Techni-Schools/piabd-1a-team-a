@@ -43,3 +43,16 @@ function loadRecipes(){
     xmlhttp.open("GET", "loader.php?type=recipesList&ingred="+ingred+"&q="+q, true);
     xmlhttp.send();
 }
+function loadRecipe(o){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var obj = document.getElementById("frame");
+            obj.innerHTML = this.responseText;
+            obj.style.display="flex";
+
+        }
+    };
+    xmlhttp.open("GET", "loader.php?type=recipe&recipe="+o.id, true);
+    xmlhttp.send();
+}

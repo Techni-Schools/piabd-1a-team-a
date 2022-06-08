@@ -7,10 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/indexCss.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/recipePopupV2.css">
     <title>FridgeDatabase</title>
     <script src="js/core.js"></script>
 </head>
 <body onload="init()">
+<div class="modal" id="frame">
+
+</div>
 <div class="navbar">
     <img class="logo" src="img/fridge.jpeg" alt="Logo">
     <a href="login.php">Login</a>
