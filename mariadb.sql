@@ -31,18 +31,6 @@ create table users
         check (`email` like _utf8mb4\'%@%.%\')
 );
 
-create table lists
-(
-    id           int auto_increment
-        primary key,
-    user_id_list int          null,
-    favourite    varchar(255) null,
-    lists        varchar(50)  null,
-    constraint fk_user_id_lists
-        foreign key (user_id_list) references users (id)
-            on delete set null
-);
-
 create table recipes
 (
     id          int auto_increment
@@ -59,6 +47,20 @@ create table recipes
             on delete set null,
     constraint ch_time
         check (`preptime` > 0)
+);
+
+create table fav
+(
+    id     int auto_increment
+        primary key,
+    user   int null,
+    recipe int null,
+    constraint fav_recipes_id_fk
+        foreign key (recipe) references recipes (id)
+            on delete cascade,
+    constraint fav_users_id_fk
+        foreign key (user) references users (id)
+            on delete cascade
 );
 
 create table ingredientsList

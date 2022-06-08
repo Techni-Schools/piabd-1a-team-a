@@ -5,44 +5,56 @@ if ($conn->connect_error) {
     die("DB err");
 }
 session_start();
-if(!$_SESSION['zalogowany']){
+if (!$_SESSION['zalogowany']) {
     die("Ta funkcja wymaga logowania");
 }
 session_start();
 
-if($_GET){
-    if($_GET['addIC']){
+if ($_GET) {
+    if ($_GET['addIC']) {
         $stmt = $conn->prepare("INSERT INTO IngredientsCategory (name) VALUES (UNHEX(?))");
         $a = bin2hex($_GET['icName']);
-        $stmt->bind_param("s",$a);
+        $stmt->bind_param("s", $a);
         $stmt->execute();
-    }
-    else if($_GET['addI']){
+    } else if ($_GET['addI']) {
         $stmt = $conn->prepare("INSERT INTO ingredients (name,category) VALUES (UNHEX(?),?)");
         $a = bin2hex($_GET['iName']);
         $b = intval($_GET['ic']);
-        $stmt->bind_param("si",$a,$b);
+        $stmt->bind_param("si", $a, $b);
         $stmt->execute();
-    }
-    else if($_GET['removeIC']){
+    } else if ($_GET['removeIC']) {
         $stmt = $conn->prepare("DELETE FROM IngredientsCategory WHERE id=?");
         $b = intval($_GET['ic']);
-        $stmt->bind_param("i",$b);
+        $stmt->bind_param("i", $b);
         $stmt->execute();
-    }
-    else if($_GET['removeI']){
+    } else if ($_GET['removeI']) {
         $stmt = $conn->prepare("DELETE FROM ingredients WHERE id=?");
         $b = intval($_GET['i']);
-        $stmt->bind_param("i",$b);
+        $stmt->bind_param("i", $b);
         $stmt->execute();
-    }
-    else{
+    } else {
         $stmt = $conn->prepare("INSERT INTO recipes (name,userId,photo,description) VALUES (UNHEX(?),?,UNHEX(?),UNHEX(?))");
-        $a = bin2hex($_GET['iName']);
-        $b = bin2hex($_GET['iName']);
-        $c = bin2hex($_GET['iName']);
-        $stmt->bind_param("siss",$a,$_SESSION['id'],$b);
+        $a = bin2hex($_GET['recipeName']);
+        $b = bin2hex($_GET['recipePhoto']);
+        $c = bin2hex($_GET['recipeDesc']);
+        $stmt->bind_param("siss", $a, $_SESSION['id'], $b, $c);
         $stmt->execute();
+        $stmt = $conn->prepare("SELECT * FROM recipes WHERE name=UNHEX(?)");
+        $stmt->bind_param("s", $a);
+        $stmt->execute();
+        $id = -1;
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $id = intval($row['id']);
+            }
+        }
+        $i = explode(",",$_GET['ingred']);
+        $stmt = $conn->prepare("INSERT INTO ingredientsList (ingred, recipe) VALUES (?,?)");
+        for($x=0; $x<sizeof($i); $x++){
+            $stmt->bind_param("ii", $i[$x],$id);
+            $stmt->execute();
+        }
     }
 }
 

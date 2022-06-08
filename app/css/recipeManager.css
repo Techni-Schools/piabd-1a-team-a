@@ -1,6 +1,7 @@
 .myRecipe {
     background: green;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .addRecipe {
